@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "75274003",
+    "project_id": "book-ticket-43292",
+    "storage_bucket": "book-ticket-43292.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75274003:android:07eb0e74fa54211f28ace6",
+        "android_client_info": {
+          "package_name": "com.aryamajiah.movie_ticket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75274003-gaci97bfd2csq497ah9j01b8jjtuppho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3YFT7BkHP94eHl9HxP7OhxY-nflLYJEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75274003-gaci97bfd2csq497ah9j01b8jjtuppho.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "75274003-ivhdv9a60nemc9c40kk719vv7tsjlgtc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.movieTicket"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
