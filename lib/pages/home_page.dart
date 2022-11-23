@@ -1,15 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_ticket/services/movie_service.dart';
 import 'package:movie_ticket/widgets/movie_item.dart';
+
+import '../bloc/selectedmovie_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    context.read<SelectedmovieBloc>().add(const SelectedmovieEvent.unselect());
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),

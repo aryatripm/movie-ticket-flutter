@@ -1,7 +1,13 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:movie_ticket/bloc/selectedmovie_bloc.dart';
 import 'package:movie_ticket/entity/movie.dart';
 import 'package:movie_ticket/services/movie_service.dart';
+import 'package:movie_ticket/services/ticket_services.dart';
 
 class DetailPage extends StatelessWidget {
   final int movieId;
@@ -18,6 +24,9 @@ class DetailPage extends StatelessWidget {
           future: MovieService().getMovie(movieId),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+              context
+                  .read<SelectedmovieBloc>()
+                  .add(SelectedmovieEvent.select(snapshot.data!));
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -42,7 +51,7 @@ class DetailPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          var userId = FirebaseAuth.instance.currentUser!.uid;
+          context.pushNamed('add_ticket');
         },
         label: const Text("Book Ticket"),
         icon: const Icon(Icons.add),

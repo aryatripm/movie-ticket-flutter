@@ -1,12 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_ticket/bloc/selectedmovie_bloc.dart';
 import 'package:movie_ticket/firebase_options.dart';
+import 'package:movie_ticket/pages/book_page.dart';
+import 'package:movie_ticket/pages/confirmation_page.dart';
 import 'package:movie_ticket/pages/detail_page.dart';
 import 'package:movie_ticket/pages/home_page.dart';
 import 'package:movie_ticket/pages/login_page.dart';
 import 'package:movie_ticket/pages/register_page.dart';
+import 'package:movie_ticket/pages/seat_page.dart';
+import 'package:movie_ticket/pages/ticket_detail_page.dart';
+import 'package:movie_ticket/pages/ticket_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,17 +39,48 @@ class MyApp extends StatelessWidget {
         builder: (context, state) => RegisterPage(),
       ),
       GoRoute(
-          path: '/',
-          name: 'home',
-          builder: (context, state) => const HomePage(),
-          routes: [
-            GoRoute(
-              path: 'detail/:id',
-              name: 'detail',
-              builder: (context, state) =>
-                  DetailPage(movieId: int.parse(state.params['id']!)),
-            )
-          ])
+        path: '/',
+        name: 'home',
+        builder: (context, state) => const HomePage(),
+        routes: [
+          GoRoute(
+            path: 'detail/:id',
+            name: 'detail',
+            builder: (context, state) =>
+                DetailPage(movieId: int.parse(state.params['id']!)),
+          ),
+          GoRoute(
+            path: 'tickets',
+            name: 'tickets',
+            builder: (context, state) => const TicketPage(),
+            routes: [
+              GoRoute(
+                  path: 'add',
+                  name: 'add_ticket',
+                  builder: (context, state) => const BookPage(),
+                  routes: [
+                    GoRoute(
+                        path: 'seat',
+                        name: 'seat',
+                        builder: (context, state) => const SeatPage(),
+                        routes: [
+                          GoRoute(
+                            path: 'confirm',
+                            name: 'confirm',
+                            builder: (context, state) =>
+                                const ConfirmationPage(),
+                          ),
+                        ]),
+                  ]),
+              GoRoute(
+                path: 'detail/:id',
+                name: 'ticket_detail',
+                builder: (context, state) => const TicketDetailPage(),
+              ),
+            ],
+          ),
+        ],
+      )
     ],
     debugLogDiagnostics: true,
     routerNeglect: false,
@@ -58,14 +96,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: ThemeData(
-        useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => SelectedmovieBloc()),
+      ],
+      child: MaterialApp.router(
+        theme: ThemeData(
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+        routeInformationParser: router.routeInformationParser,
+        routeInformationProvider: router.routeInformationProvider,
+        routerDelegate: router.routerDelegate,
       ),
-      debugShowCheckedModeBanner: false,
-      routeInformationParser: router.routeInformationParser,
-      routeInformationProvider: router.routeInformationProvider,
-      routerDelegate: router.routerDelegate,
     );
   }
 }
