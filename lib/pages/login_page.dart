@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
+
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +19,19 @@ class LoginPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(),
+            TextField(
+              controller: _email,
+            ),
             const SizedBox(
               height: 10,
             ),
-            TextField(),
+            TextField(
+              controller: _password,
+            ),
             const SizedBox(
               height: 5,
             ),
-            ElevatedButton(
+            TextButton(
               onPressed: () {
                 context.goNamed('register');
               },
@@ -33,7 +41,13 @@ class LoginPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () async {
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: _email.text,
+            password: _password.text,
+          );
+          context.goNamed('home');
+        },
         label: const Text("Login"),
         icon: const Icon(Icons.add),
       ),

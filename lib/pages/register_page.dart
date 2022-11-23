@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  RegisterPage({Key? key}) : super(key: key);
+
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +18,19 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(),
+            TextField(
+              controller: _email,
+            ),
             const SizedBox(
               height: 10,
             ),
-            TextField(),
+            TextField(
+              controller: _password,
+            ),
             const SizedBox(
               height: 5,
             ),
-            ElevatedButton(
+            TextButton(
               onPressed: () {
                 context.goNamed('login');
               },
@@ -32,7 +40,13 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: _email.text,
+            password: _password.text,
+          );
+          context.goNamed('home');
+        },
         label: const Text("Register"),
         icon: const Icon(Icons.add),
       ),
