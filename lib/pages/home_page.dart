@@ -44,12 +44,23 @@ class HomePage extends StatelessWidget {
                 },
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-                context.goNamed('login');
-              },
-              child: const Text('Log out'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    context.goNamed('tickets');
+                  },
+                  child: const Text('Tickets'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                    context.goNamed('login');
+                  },
+                  child: const Text('Log out'),
+                ),
+              ],
             ),
           ],
         ),

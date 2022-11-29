@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_ticket/bloc/newticket_bloc.dart';
 import 'package:movie_ticket/bloc/selectedmovie_bloc.dart';
 import 'package:movie_ticket/firebase_options.dart';
 import 'package:movie_ticket/pages/book_page.dart';
@@ -42,6 +43,13 @@ class MyApp extends StatelessWidget {
         path: '/',
         name: 'home',
         builder: (context, state) => const HomePage(),
+        redirect: (context, state) {
+          if (FirebaseAuth.instance.currentUser == null) {
+            return '/login';
+          } else {
+            return null;
+          }
+        },
         routes: [
           GoRoute(
             path: 'detail/:id',
@@ -57,25 +65,25 @@ class MyApp extends StatelessWidget {
               GoRoute(
                   path: 'add',
                   name: 'add_ticket',
-                  builder: (context, state) => const BookPage(),
+                  builder: (context, state) => BookPage(),
                   routes: [
                     GoRoute(
                         path: 'seat',
                         name: 'seat',
-                        builder: (context, state) => const SeatPage(),
+                        builder: (context, state) => SeatPage(),
                         routes: [
                           GoRoute(
                             path: 'confirm',
                             name: 'confirm',
-                            builder: (context, state) =>
-                                const ConfirmationPage(),
+                            builder: (context, state) => ConfirmationPage(),
                           ),
                         ]),
                   ]),
               GoRoute(
                 path: 'detail/:id',
                 name: 'ticket_detail',
-                builder: (context, state) => const TicketDetailPage(),
+                builder: (context, state) =>
+                    TicketDetailPage(ticketId: state.params['id']!),
               ),
             ],
           ),
@@ -85,13 +93,6 @@ class MyApp extends StatelessWidget {
     debugLogDiagnostics: true,
     routerNeglect: false,
     initialLocation: FirebaseAuth.instance.currentUser == null ? '/login' : '/',
-    redirect: (context, state) {
-      // if (FirebaseAuth.instance.currentUser == null) {
-      //   return '/login';
-      // } else {
-      return null;
-      // }
-    },
   );
 
   @override
@@ -99,6 +100,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => SelectedmovieBloc()),
+        BlocProvider(create: (context) => NewticketBloc()),
       ],
       child: MaterialApp.router(
         theme: ThemeData(

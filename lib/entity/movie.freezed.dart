@@ -21,6 +21,7 @@ Movie _$MovieFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Movie {
   String get backdrop_path => throw _privateConstructorUsedError;
+  String get poster_path => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get overview => throw _privateConstructorUsedError;
@@ -40,6 +41,7 @@ abstract class $MovieCopyWith<$Res> {
   @useResult
   $Res call(
       {String backdrop_path,
+      String poster_path,
       int id,
       String title,
       String overview,
@@ -62,6 +64,7 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
   @override
   $Res call({
     Object? backdrop_path = null,
+    Object? poster_path = null,
     Object? id = null,
     Object? title = null,
     Object? overview = null,
@@ -73,6 +76,10 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
       backdrop_path: null == backdrop_path
           ? _value.backdrop_path
           : backdrop_path // ignore: cast_nullable_to_non_nullable
+              as String,
+      poster_path: null == poster_path
+          ? _value.poster_path
+          : poster_path // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -110,6 +117,7 @@ abstract class _$$_MovieCopyWith<$Res> implements $MovieCopyWith<$Res> {
   @useResult
   $Res call(
       {String backdrop_path,
+      String poster_path,
       int id,
       String title,
       String overview,
@@ -128,6 +136,7 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
   @override
   $Res call({
     Object? backdrop_path = null,
+    Object? poster_path = null,
     Object? id = null,
     Object? title = null,
     Object? overview = null,
@@ -139,6 +148,10 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
       backdrop_path: null == backdrop_path
           ? _value.backdrop_path
           : backdrop_path // ignore: cast_nullable_to_non_nullable
+              as String,
+      poster_path: null == poster_path
+          ? _value.poster_path
+          : poster_path // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -173,6 +186,7 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
 class _$_Movie implements _Movie {
   const _$_Movie(
       {required this.backdrop_path,
+      required this.poster_path,
       required this.id,
       required this.title,
       required this.overview,
@@ -186,6 +200,8 @@ class _$_Movie implements _Movie {
 
   @override
   final String backdrop_path;
+  @override
+  final String poster_path;
   @override
   final int id;
   @override
@@ -206,7 +222,7 @@ class _$_Movie implements _Movie {
 
   @override
   String toString() {
-    return 'Movie(backdrop_path: $backdrop_path, id: $id, title: $title, overview: $overview, release_date: $release_date, vote_average: $vote_average, genres: $genres)';
+    return 'Movie(backdrop_path: $backdrop_path, poster_path: $poster_path, id: $id, title: $title, overview: $overview, release_date: $release_date, vote_average: $vote_average, genres: $genres)';
   }
 
   @override
@@ -216,6 +232,8 @@ class _$_Movie implements _Movie {
             other is _$_Movie &&
             (identical(other.backdrop_path, backdrop_path) ||
                 other.backdrop_path == backdrop_path) &&
+            (identical(other.poster_path, poster_path) ||
+                other.poster_path == poster_path) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.overview, overview) ||
@@ -232,6 +250,7 @@ class _$_Movie implements _Movie {
   int get hashCode => Object.hash(
       runtimeType,
       backdrop_path,
+      poster_path,
       id,
       title,
       overview,
@@ -256,6 +275,7 @@ class _$_Movie implements _Movie {
 abstract class _Movie implements Movie {
   const factory _Movie(
       {required final String backdrop_path,
+      required final String poster_path,
       required final int id,
       required final String title,
       required final String overview,
@@ -267,6 +287,8 @@ abstract class _Movie implements Movie {
 
   @override
   String get backdrop_path;
+  @override
+  String get poster_path;
   @override
   int get id;
   @override

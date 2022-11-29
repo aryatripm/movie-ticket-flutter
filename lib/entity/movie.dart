@@ -8,6 +8,7 @@ part 'movie.g.dart';
 class Movie with _$Movie {
   const factory Movie({
     required String backdrop_path,
+    required String poster_path,
     required int id,
     required String title,
     required String overview,
