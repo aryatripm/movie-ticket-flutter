@@ -29,7 +29,6 @@ class _SeatPageState extends State<SeatPage> {
       appBar: AppBar(),
       body: Column(
         children: [
-          const SizedBox(height: 50),
           Container(
             width: 300,
             height: 80,
@@ -39,7 +38,7 @@ class _SeatPageState extends State<SeatPage> {
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 30),
           Container(
             child: generateSeats(context),
           ),

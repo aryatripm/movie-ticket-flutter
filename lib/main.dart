@@ -15,6 +15,7 @@ import 'package:movie_ticket/pages/register_page.dart';
 import 'package:movie_ticket/pages/seat_page.dart';
 import 'package:movie_ticket/pages/ticket_detail_page.dart';
 import 'package:movie_ticket/pages/ticket_page.dart';
+import 'package:movie_ticket/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,12 +33,23 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: '/login',
         name: 'login',
-        builder: (context, state) => LoginPage(),
+        // builder: (context, state) => LoginPage(),
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: LoginPage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child),
+          transitionDuration: Duration(seconds: 2),
+        ),
       ),
       GoRoute(
         path: '/register',
         name: 'register',
-        builder: (context, state) => RegisterPage(),
+        // builder: (context, state) => RegisterPage(),
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: RegisterPage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child),
+        ),
       ),
       GoRoute(
         path: '/',
@@ -103,9 +115,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => NewticketBloc()),
       ],
       child: MaterialApp.router(
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
+        // darkTheme: MyTheme.darkMode,
+        theme: MyTheme.darkMode,
+        // themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
         routeInformationParser: router.routeInformationParser,
         routeInformationProvider: router.routeInformationProvider,

@@ -17,8 +17,18 @@ class MovieItem extends StatelessWidget {
         params: {"id": movie.id.toString()},
       ),
       child: Container(
-        padding: const EdgeInsets.all(8),
-        child: Text(movie.title),
+        margin: const EdgeInsets.all(5),
+        height: 200,
+        width: 120,
+        decoration: BoxDecoration(
+          color: Colors.black26,
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: NetworkImage(
+                "https://image.tmdb.org/t/p/w500${movie.poster_path}"),
+          ),
+        ),
       ),
     );
   }
