@@ -11,34 +11,30 @@ class TicketPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: FutureBuilder<QuerySnapshot>(
-        future: TicketService()
-            .getAllTickets(FirebaseAuth.instance.currentUser!.uid),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView(
-              children: snapshot.data!.docs.map((e) {
-                Ticket ticket =
-                    Ticket.fromJson(e.data() as Map<String, dynamic>);
-                ticket.id = e.id;
-                return TicketItem(
-                  ticket: ticket,
-                  onTap: () {
-                    context.goNamed(
-                      'ticket_detail',
-                      params: {"id": ticket.id ?? '0'},
-                    );
-                  },
-                );
-              }).toList(),
-            );
-          } else {
-            return const Text('There is no recent tickets');
-          }
-        },
-      ),
+    return FutureBuilder<QuerySnapshot>(
+      future:
+          TicketService().getAllTickets(FirebaseAuth.instance.currentUser!.uid),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return ListView(
+            children: snapshot.data!.docs.map((e) {
+              Ticket ticket = Ticket.fromJson(e.data() as Map<String, dynamic>);
+              ticket.id = e.id;
+              return TicketItem(
+                ticket: ticket,
+                onTap: () {
+                  context.goNamed(
+                    'ticket_detail',
+                    params: {"id": ticket.id ?? '0'},
+                  );
+                },
+              );
+            }).toList(),
+          );
+        } else {
+          return const Text('There is no recent tickets');
+        }
+      },
     );
   }
 }

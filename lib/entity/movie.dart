@@ -13,6 +13,9 @@ class Movie with _$Movie {
     required String title,
     required String overview,
     required String release_date,
+    required String original_language,
+    @Default("") String tagline,
+    @Default(0) int runtime,
     required double vote_average,
     @Default([]) List<Genre> genres,
   }) = _Movie;

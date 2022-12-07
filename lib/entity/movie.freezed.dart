@@ -26,6 +26,9 @@ mixin _$Movie {
   String get title => throw _privateConstructorUsedError;
   String get overview => throw _privateConstructorUsedError;
   String get release_date => throw _privateConstructorUsedError;
+  String get original_language => throw _privateConstructorUsedError;
+  String get tagline => throw _privateConstructorUsedError;
+  int get runtime => throw _privateConstructorUsedError;
   double get vote_average => throw _privateConstructorUsedError;
   List<Genre> get genres => throw _privateConstructorUsedError;
 
@@ -46,6 +49,9 @@ abstract class $MovieCopyWith<$Res> {
       String title,
       String overview,
       String release_date,
+      String original_language,
+      String tagline,
+      int runtime,
       double vote_average,
       List<Genre> genres});
 }
@@ -69,6 +75,9 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
     Object? title = null,
     Object? overview = null,
     Object? release_date = null,
+    Object? original_language = null,
+    Object? tagline = null,
+    Object? runtime = null,
     Object? vote_average = null,
     Object? genres = null,
   }) {
@@ -97,6 +106,18 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
           ? _value.release_date
           : release_date // ignore: cast_nullable_to_non_nullable
               as String,
+      original_language: null == original_language
+          ? _value.original_language
+          : original_language // ignore: cast_nullable_to_non_nullable
+              as String,
+      tagline: null == tagline
+          ? _value.tagline
+          : tagline // ignore: cast_nullable_to_non_nullable
+              as String,
+      runtime: null == runtime
+          ? _value.runtime
+          : runtime // ignore: cast_nullable_to_non_nullable
+              as int,
       vote_average: null == vote_average
           ? _value.vote_average
           : vote_average // ignore: cast_nullable_to_non_nullable
@@ -122,6 +143,9 @@ abstract class _$$_MovieCopyWith<$Res> implements $MovieCopyWith<$Res> {
       String title,
       String overview,
       String release_date,
+      String original_language,
+      String tagline,
+      int runtime,
       double vote_average,
       List<Genre> genres});
 }
@@ -141,6 +165,9 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
     Object? title = null,
     Object? overview = null,
     Object? release_date = null,
+    Object? original_language = null,
+    Object? tagline = null,
+    Object? runtime = null,
     Object? vote_average = null,
     Object? genres = null,
   }) {
@@ -169,6 +196,18 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
           ? _value.release_date
           : release_date // ignore: cast_nullable_to_non_nullable
               as String,
+      original_language: null == original_language
+          ? _value.original_language
+          : original_language // ignore: cast_nullable_to_non_nullable
+              as String,
+      tagline: null == tagline
+          ? _value.tagline
+          : tagline // ignore: cast_nullable_to_non_nullable
+              as String,
+      runtime: null == runtime
+          ? _value.runtime
+          : runtime // ignore: cast_nullable_to_non_nullable
+              as int,
       vote_average: null == vote_average
           ? _value.vote_average
           : vote_average // ignore: cast_nullable_to_non_nullable
@@ -191,6 +230,9 @@ class _$_Movie implements _Movie {
       required this.title,
       required this.overview,
       required this.release_date,
+      required this.original_language,
+      this.tagline = "",
+      this.runtime = 0,
       required this.vote_average,
       final List<Genre> genres = const []})
       : _genres = genres;
@@ -211,6 +253,14 @@ class _$_Movie implements _Movie {
   @override
   final String release_date;
   @override
+  final String original_language;
+  @override
+  @JsonKey()
+  final String tagline;
+  @override
+  @JsonKey()
+  final int runtime;
+  @override
   final double vote_average;
   final List<Genre> _genres;
   @override
@@ -222,7 +272,7 @@ class _$_Movie implements _Movie {
 
   @override
   String toString() {
-    return 'Movie(backdrop_path: $backdrop_path, poster_path: $poster_path, id: $id, title: $title, overview: $overview, release_date: $release_date, vote_average: $vote_average, genres: $genres)';
+    return 'Movie(backdrop_path: $backdrop_path, poster_path: $poster_path, id: $id, title: $title, overview: $overview, release_date: $release_date, original_language: $original_language, tagline: $tagline, runtime: $runtime, vote_average: $vote_average, genres: $genres)';
   }
 
   @override
@@ -240,6 +290,10 @@ class _$_Movie implements _Movie {
                 other.overview == overview) &&
             (identical(other.release_date, release_date) ||
                 other.release_date == release_date) &&
+            (identical(other.original_language, original_language) ||
+                other.original_language == original_language) &&
+            (identical(other.tagline, tagline) || other.tagline == tagline) &&
+            (identical(other.runtime, runtime) || other.runtime == runtime) &&
             (identical(other.vote_average, vote_average) ||
                 other.vote_average == vote_average) &&
             const DeepCollectionEquality().equals(other._genres, _genres));
@@ -255,6 +309,9 @@ class _$_Movie implements _Movie {
       title,
       overview,
       release_date,
+      original_language,
+      tagline,
+      runtime,
       vote_average,
       const DeepCollectionEquality().hash(_genres));
 
@@ -280,6 +337,9 @@ abstract class _Movie implements Movie {
       required final String title,
       required final String overview,
       required final String release_date,
+      required final String original_language,
+      final String tagline,
+      final int runtime,
       required final double vote_average,
       final List<Genre> genres}) = _$_Movie;
 
@@ -297,6 +357,12 @@ abstract class _Movie implements Movie {
   String get overview;
   @override
   String get release_date;
+  @override
+  String get original_language;
+  @override
+  String get tagline;
+  @override
+  int get runtime;
   @override
   double get vote_average;
   @override

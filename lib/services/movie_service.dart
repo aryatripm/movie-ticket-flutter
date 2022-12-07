@@ -67,4 +67,19 @@ class MovieService {
       return null;
     }
   }
+
+  Future<String?> getMovieTrailer(int id) async {
+    try {
+      var result = await dio.get(
+          "${Constant.BASE_URL}movie/$id/videos?api_key=${Constant.API_KEY}");
+
+      var list = (result.data['results'] as List);
+      var map = list.map((e) => e as Map<String, dynamic>).toList();
+
+      return map.firstWhere((element) => element['type'] == "Trailer")["key"];
+    } catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
 }

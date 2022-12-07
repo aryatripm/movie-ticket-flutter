@@ -1,121 +1,70 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:movie_ticket/services/movie_service.dart';
-import 'package:movie_ticket/widgets/movie_item.dart';
+import 'package:movie_ticket/pages/main_page.dart';
+import 'package:movie_ticket/pages/ticket_page.dart';
 
 import '../bloc/selectedmovie_bloc.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+final pages = [const MainPage(), const TicketPage(), const MainPage()];
+
+class _HomePageState extends State<HomePage> {
+  int _selectedMenu = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedMenu = 0;
+  }
 
   @override
   Widget build(BuildContext context) {
     context.read<SelectedmovieBloc>().add(const SelectedmovieEvent.unselect());
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Hi, ${FirebaseAuth.instance.currentUser!.email}"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.goNamed('tickets');
-            },
-            icon: const Icon(Icons.history),
-          ),
-          IconButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-              context.goNamed('login');
-            },
-            icon: const Icon(Icons.exit_to_app),
-          ),
+      // appBar: AppBar(
+      //   title: Text("Hi, ${FirebaseAuth.instance.currentUser!.email}"),
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {
+      //         context.goNamed('tickets');
+      //       },
+      //       icon: const Icon(Icons.history),
+      //     ),
+      //     IconButton(
+      //       onPressed: () {
+      //         FirebaseAuth.instance.signOut();
+      //         context.goNamed('login');
+      //       },
+      //       icon: const Icon(Icons.exit_to_app),
+      //     ),
+      //   ],
+      // ),
+      body: pages[_selectedMenu],
+      extendBody: true,
+      bottomNavigationBar: DotNavigationBar(
+        unselectedItemColor: Colors.white,
+        currentIndex: _selectedMenu,
+        backgroundColor: Colors.black,
+        dotIndicatorColor: Colors.red,
+        selectedItemColor: Colors.red,
+        paddingR: const EdgeInsets.all(10),
+        onTap: (p0) {
+          setState(() {
+            _selectedMenu = p0;
+          });
+        },
+        items: [
+          DotNavigationBarItem(icon: const Icon(Icons.home_filled)),
+          DotNavigationBarItem(icon: const Icon(Icons.bookmark)),
+          DotNavigationBarItem(icon: const Icon(Icons.logout)),
         ],
-      ),
-      body: Container(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        width: double.infinity,
-        height: double.infinity,
-        child: ListView(
-          children: [
-            const SizedBox(height: 20),
-            const Text(
-              "Trending",
-              style: TextStyle(fontSize: 18),
-            ),
-            Container(
-              height: 200,
-              child: FutureBuilder(
-                future: MovieService().getListMovieTrending(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: (snapshot.data ?? [])
-                          .map((e) => MovieItem(
-                                movie: e,
-                              ))
-                          .toList(),
-                    );
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                },
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              "Now Showing",
-              style: TextStyle(fontSize: 18),
-            ),
-            Container(
-              height: 200,
-              child: FutureBuilder(
-                future: MovieService().getListMovieNowShowing(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: (snapshot.data ?? [])
-                          .map((e) => MovieItem(
-                                movie: e,
-                              ))
-                          .toList(),
-                    );
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                },
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              "Coming Soon",
-              style: TextStyle(fontSize: 18),
-            ),
-            Container(
-              height: 200,
-              child: FutureBuilder(
-                future: MovieService().getListMovieTrendingComingSoon(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: (snapshot.data ?? [])
-                          .map((e) => MovieItem(
-                                movie: e,
-                              ))
-                          .toList(),
-                    );
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                },
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
