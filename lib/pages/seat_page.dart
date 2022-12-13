@@ -26,12 +26,22 @@ class _SeatPageState extends State<SeatPage> {
   Widget build(BuildContext context) {
     context.read<NewticketBloc>().add(NewticketEvent.editSeats(selectedSeats));
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
+      body: ListView(
         children: [
+          Row(
+            children: [
+              TextButton.icon(
+                label: const Text("Back"),
+                icon: const Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  context.pop();
+                },
+              ),
+            ],
+          ),
           Container(
-            width: 300,
-            height: 80,
+            // width: 200,
+            height: 100,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/screen.png'),
@@ -54,9 +64,9 @@ class _SeatPageState extends State<SeatPage> {
                   Container(
                     decoration: const BoxDecoration(
                       color: Colors.grey,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    height: 20,
+                    height: 30,
                     width: 20,
                   ),
                   const SizedBox(height: 5),
@@ -68,9 +78,9 @@ class _SeatPageState extends State<SeatPage> {
                   Container(
                     decoration: const BoxDecoration(
                       color: Colors.black,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    height: 20,
+                    height: 30,
                     width: 20,
                   ),
                   const SizedBox(height: 5),
@@ -82,9 +92,9 @@ class _SeatPageState extends State<SeatPage> {
                   Container(
                     decoration: const BoxDecoration(
                       color: Colors.red,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    height: 20,
+                    height: 30,
                     width: 20,
                   ),
                   const SizedBox(height: 5),
@@ -92,21 +102,65 @@ class _SeatPageState extends State<SeatPage> {
                 ],
               ),
             ],
-          )
+          ),
+          Container(
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(15),
+            decoration: const BoxDecoration(
+              color: Color(0xFF373838),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Selected Seats",
+                  style: TextStyle(fontSize: 20),
+                ),
+                Row(
+                  children: selectedSeats.map((e) => Text("$e,")).toList(),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Rp. ${(selectedSeats.length * 20000).toString()}",
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => context.pushNamed('confirm'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 50,
+                          vertical: 10,
+                        ),
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
+                      ),
+                      child: const Text(
+                        "Confirm",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => context.pushNamed('confirm'),
-        label: BlocBuilder<NewticketBloc, NewticketState>(
-          builder: (context, state) {
-            return Text(state.when(
-              initial: () => "Click seat first!",
-              created: (ticket) =>
-                  "Buy Ticket Rp. ${((ticket.seats?.length ?? 0) * 20000).toString()}",
-            ));
-          },
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () => context.pushNamed('confirm'),
+      //   label: BlocBuilder<NewticketBloc, NewticketState>(
+      //     builder: (context, state) {
+      //       return Text(state.when(
+      //         initial: () => "Click seat first!",
+      //         created: (ticket) =>
+      //             "Buy Ticket Rp. ${((ticket.seats?.length ?? 0) * 20000).toString()}",
+      //       ));
+      //     },
+      //   ),
+      // ),
     );
   }
 

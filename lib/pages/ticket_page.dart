@@ -23,7 +23,7 @@ class TicketPage extends StatelessWidget {
               return TicketItem(
                 ticket: ticket,
                 onTap: () {
-                  context.goNamed(
+                  context.pushNamed(
                     'ticket_detail',
                     params: {"id": ticket.id ?? '0'},
                   );

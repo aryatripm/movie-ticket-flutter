@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movie_ticket/entity/ticket.dart';
+import 'package:movie_ticket/services/user_services.dart';
 
 class TicketService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -7,7 +8,10 @@ class TicketService {
       FirebaseFirestore.instance.collection('tickets');
 
   Future<QuerySnapshot> getAllTickets(String user_id) {
-    return tickets.where('user_id', isEqualTo: user_id).get();
+    return tickets
+        .where('user_id', isEqualTo: user_id)
+        .orderBy("date", descending: true)
+        .get();
   }
 
   Future<DocumentSnapshot<Object?>> getTicket(String id) {
@@ -15,8 +19,8 @@ class TicketService {
     return tickets.doc(id).get();
   }
 
-  void createTicket(Ticket newTicket) {
-    tickets.add({
+  Future<DocumentReference<Object?>> createTicket(Ticket newTicket) {
+    return tickets.add({
       'movie_id': newTicket.movie_id,
       'user_id': newTicket.user_id,
       'date': newTicket.date,

@@ -33,7 +33,7 @@ class DetailPage extends StatelessWidget {
                   Stack(
                     children: [
                       Container(
-                        height: 500,
+                        height: MediaQuery.of(context).size.height / 2,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                               opacity: 0.5,
@@ -44,7 +44,7 @@ class DetailPage extends StatelessWidget {
                       ),
                       Positioned(
                         child: Container(
-                          height: 501,
+                          height: MediaQuery.of(context).size.height / 2,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               begin: const Alignment(0, 1),
@@ -69,7 +69,7 @@ class DetailPage extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        height: 500,
+                        height: MediaQuery.of(context).size.height / 2,
                         child: Center(
                           child: ElevatedButton.icon(
                             icon: const Icon(Icons.play_circle_fill_outlined),
@@ -140,7 +140,7 @@ class DetailPage extends StatelessWidget {
                           maxLines: 4,
                           overflow: TextOverflow.fade,
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 15),
                         Center(
                           child: ElevatedButton(
                             onPressed: () {
@@ -158,6 +158,7 @@ class DetailPage extends StatelessWidget {
                                 style: TextStyle(fontSize: 20)),
                           ),
                         ),
+                        const SizedBox(height: 15),
                       ],
                     ),
                   ),

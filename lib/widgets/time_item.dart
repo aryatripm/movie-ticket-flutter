@@ -20,16 +20,19 @@ class TimeItem extends StatelessWidget {
       },
       child: Container(
         width: 100,
-        child: Card(
-          color: isSelected ? Colors.black54 : Colors.black12,
-          margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
-          elevation: 1,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("$hours:00"),
-            ],
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xff383737) : Colors.transparent,
+          border: Border.all(
+            color: const Color(0xff383737),
           ),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+        ),
+        margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("$hours:00"),
+          ],
         ),
       ),
     );

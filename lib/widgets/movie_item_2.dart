@@ -10,10 +10,11 @@ class MovieItem2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.pushNamed(
-        'detail',
-        params: {"id": movie.id.toString()},
-      ),
+      // onTap: () => context.pushNamed(
+      //   'detail',
+      //   params: {"id": movie.id.toString()},
+      // ),
+
       child: Container(
         margin: const EdgeInsets.all(5),
         height: 200,

@@ -59,7 +59,10 @@ class MainPage extends StatelessWidget {
                       ),
                       Row(
                         children: const [
-                          Icon(Icons.location_on),
+                          Icon(
+                            Icons.location_on,
+                            color: Colors.red,
+                          ),
                           SizedBox(width: 5),
                           Text("Bandung"),
                         ],

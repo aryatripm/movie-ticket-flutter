@@ -20,18 +20,27 @@ class DateItem extends StatelessWidget {
         onTap();
       },
       child: Container(
-        width: 100,
-        child: Card(
-          color: isSelected ? Colors.black54 : Colors.black12,
-          margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
-          elevation: 1,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(DateFormat.E().format(date)),
-              Text(date.day.toString()),
-            ],
-          ),
+        width: 60,
+        margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+        decoration: BoxDecoration(
+            // color: isSelected ? Colors.red : const Color(0xFF383737),
+            color: isSelected ? const Color(0xff383737) : Colors.transparent,
+            border: Border.all(
+              color: const Color(0xff383737),
+            ),
+            borderRadius: const BorderRadius.all(Radius.circular(20))),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              DateFormat.E().format(date),
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(
+              date.day.toString(),
+              style: const TextStyle(fontSize: 16),
+            ),
+          ],
         ),
       ),
     );

@@ -19,10 +19,10 @@ class Seat extends StatelessWidget {
       onTap: () => onTap(),
       child: Container(
         width: 20,
-        height: 20,
+        height: 30,
         decoration: BoxDecoration(
           color: isSelected ? Colors.red : Colors.grey,
-          borderRadius: const BorderRadius.all(Radius.circular(5)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         margin: EdgeInsets.only(
           right: marginRight.toDouble(),

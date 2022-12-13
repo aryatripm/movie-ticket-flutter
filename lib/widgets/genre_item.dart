@@ -15,7 +15,7 @@ class GenreItem extends StatelessWidget {
       decoration: const BoxDecoration(
           color: Color(0xFF383737),
           borderRadius: BorderRadius.all(Radius.circular(20))),
-      child: Text(genre.name),
+      child: Center(child: Text(genre.name)),
     );
   }
 }

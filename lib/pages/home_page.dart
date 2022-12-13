@@ -2,7 +2,9 @@ import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_ticket/pages/main_page.dart';
+import 'package:movie_ticket/pages/setting_page.dart';
 import 'package:movie_ticket/pages/ticket_page.dart';
+import 'package:movie_ticket/pages/user_page.dart';
 
 import '../bloc/selectedmovie_bloc.dart';
 
@@ -13,7 +15,12 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-final pages = [const MainPage(), const TicketPage(), const MainPage()];
+final pages = [
+  const MainPage(),
+  const TicketPage(),
+  const UserPage(),
+  const SettingPage(),
+];
 
 class _HomePageState extends State<HomePage> {
   int _selectedMenu = 0;
@@ -63,7 +70,8 @@ class _HomePageState extends State<HomePage> {
         items: [
           DotNavigationBarItem(icon: const Icon(Icons.home_filled)),
           DotNavigationBarItem(icon: const Icon(Icons.bookmark)),
-          DotNavigationBarItem(icon: const Icon(Icons.logout)),
+          DotNavigationBarItem(icon: const Icon(Icons.person)),
+          DotNavigationBarItem(icon: const Icon(Icons.settings)),
         ],
       ),
     );

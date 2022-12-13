@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:card_swiper/card_swiper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -48,59 +49,109 @@ class _BookPageState extends State<BookPage> {
         .read<NewticketBloc>()
         .add(NewticketEvent.editLocation(selectedTheater));
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        padding: const EdgeInsets.all(20),
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BlocBuilder<SelectedmovieBloc, SelectedmovieState>(
-              builder: (context, state) {
-                return Text(state.when(
-                  selected: (selectedMovie) {
-                    context.read<NewticketBloc>().add(
-                        NewticketEvent.editMovieId(
-                            selectedMovie.id.toString()));
-                    return '${selectedMovie.id}';
-                  },
-                  unselected: () => '-',
-                ));
-              },
-            ),
-            Container(
-              width: double.infinity,
-              height: 100,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: generateDates(context),
+      extendBody: true,
+      body: ListView(
+        children: [
+          Row(
+            children: [
+              TextButton.icon(
+                label: const Text("Back"),
+                icon: const Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  context.pop();
+                },
               ),
+            ],
+          ),
+          BlocBuilder<SelectedmovieBloc, SelectedmovieState>(
+            builder: (context, state) {
+              return state.when(
+                selected: (selectedMovie) {
+                  context.read<NewticketBloc>().add(
+                      NewticketEvent.editMovieId(selectedMovie.id.toString()));
+                  return Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 15),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 20,
+                    ),
+                    decoration: const BoxDecoration(
+                      // color: Color(0xff383737),
+                      color: Colors.red,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    child: Text(
+                      selectedMovie.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  );
+                },
+                unselected: () => const SizedBox(),
+              );
+            },
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: const Text(
+              "Select Date & Time",
+              style: TextStyle(fontSize: 20),
             ),
-            Container(
-              width: double.infinity,
-              height: 50,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: generateTimes(context),
-              ),
+          ),
+          Container(
+            height: 100,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: generateDates(context),
             ),
-            const SizedBox(
-              height: 10,
+          ),
+          Container(
+            height: 50,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: generateTimes(context),
             ),
-            const Text("Theatres Available"),
-            Expanded(
-              child: ListView(
-                children: generateTheatres(context),
-              ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: const Text(
+              "Theatres Available",
+              style: TextStyle(fontSize: 20),
             ),
-          ],
-        ),
+          ),
+          Column(
+            children: generateTheatres(context),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => context.pushNamed('seat'),
-        label: const Text("Procced"),
-        icon: const Icon(Icons.arrow_circle_right),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () => context.pushNamed('seat'),
+      //   label: const Text("Procced"),
+      //   icon: const Icon(Icons.arrow_circle_right),
+      // ),
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.all(20),
+        padding: const EdgeInsets.symmetric(horizontal: 70),
+        child: ElevatedButton(
+          onPressed: () => context.pushNamed('seat'),
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(
+              // horizontal: 10,
+              vertical: 15,
+            ),
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
+          ),
+          child: const Text(
+            "Confirm",
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
       ),
     );
   }
