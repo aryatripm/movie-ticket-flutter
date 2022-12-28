@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -13,6 +16,8 @@ import 'package:movie_ticket/services/user_services.dart';
 class ConfirmationPage extends StatelessWidget {
   ConfirmationPage({Key? key}) : super(key: key);
   late Ticket createdTicket;
+  int userBalance = 0;
+  int ticketPrice = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +172,12 @@ class ConfirmationPage extends StatelessWidget {
                 if (snapshot.hasData) {
                   MyUser.User user = MyUser.User.fromJson(
                       snapshot.data!.data() as Map<String, dynamic>);
-                  return Text("IDR ${user.balance}");
+                  userBalance = user.balance ?? 0;
+                  return Text(NumberFormat.currency(
+                    locale: 'id',
+                    decimalDigits: 0,
+                    symbol: 'IDR ',
+                  ).format(user.balance));
                 } else {
                   return const Text("Loading...");
                 }
@@ -188,9 +198,14 @@ class ConfirmationPage extends StatelessWidget {
                     BlocBuilder<NewticketBloc, NewticketState>(
                       builder: (context, state) {
                         return state.when(
-                          initial: () => Text("IDR 0"),
+                          initial: () => const Text("IDR 0"),
                           created: (ticket) {
-                            return Text("IDR ${ticket.seats!.length * 20000}");
+                            ticketPrice = ticket.seats!.length * 20000;
+                            return Text(NumberFormat.currency(
+                                    locale: 'id',
+                                    decimalDigits: 0,
+                                    symbol: 'IDR ')
+                                .format(ticket.seats!.length * 20000));
                           },
                         );
                       },
@@ -199,11 +214,55 @@ class ConfirmationPage extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    TicketService()
-                        .createTicket(createdTicket)
-                        .then((value) => context.goNamed('home'));
+                    if (userBalance > ticketPrice) {
+                      // context.pushNamed('success', extra: createdTicket);
+                      TicketService().createTicket(createdTicket).then(
+                            (value) => context.goNamed(
+                              'success',
+                              queryParams: {'type': 'ticket'},
+                            ),
+                          );
+                    } else {
+                      showFlash(
+                        context: context,
+                        duration: const Duration(seconds: 3),
+                        builder: (context, controller) {
+                          return Flash.bar(
+                            backgroundColor: const Color(0xFF383737),
+                            position: FlashPosition.top,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            behavior: FlashBehavior.floating,
+                            margin: const EdgeInsets.all(10),
+                            boxShadows: const [
+                              BoxShadow(
+                                color: Colors.black, //New
+                                blurRadius: 10.0,
+                                offset: Offset(0, 0),
+                              )
+                            ],
+                            controller: controller,
+                            child: FlashBar(
+                              icon: const Icon(Icons.info_outline_rounded),
+                              indicatorColor: Colors.red,
+                              title: const Text("Oops!",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15)),
+                              content: const Text("Insufficient Balance"),
+                              primaryAction: TextButton(
+                                onPressed: () => context.goNamed("topup"),
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    foregroundColor: Colors.red),
+                                child: const Text("Top Up"),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    }
                   },
-                  child: const Text("Pay"),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 50,
@@ -211,6 +270,7 @@ class ConfirmationPage extends StatelessWidget {
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
                   ),
+                  child: const Text("Pay"),
                 )
               ],
             )

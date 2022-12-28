@@ -13,12 +13,19 @@ class UserService {
     return users.doc(id).snapshots();
   }
 
-  Stream<QuerySnapshot> getAllHistoryTopUp(String user_id) {
-    return history.where('user_id', isEqualTo: user_id).snapshots();
+  Future<DocumentSnapshot<Object?>> getOneTimeUser(String id) {
+    return users.doc(id).get();
   }
 
-  Future<DocumentReference<Object?>> createUser(User newUser) {
-    return users.add({
+  Stream<QuerySnapshot> getAllHistoryTopUp(String user_id) {
+    return history
+        .where('user_id', isEqualTo: user_id)
+        .orderBy('date', descending: true)
+        .snapshots();
+  }
+
+  Future<void> createUser(User newUser) {
+    return users.doc(newUser.id).set({
       'name': newUser.name,
       'email': newUser.email,
       'balance': newUser.balance,

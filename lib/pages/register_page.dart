@@ -1,12 +1,17 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_ticket/entity/user.dart' as MyUser;
+import 'package:movie_ticket/services/user_services.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({Key? key}) : super(key: key);
 
   final TextEditingController _email = TextEditingController();
+  final TextEditingController _name = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _repassword = TextEditingController();
 
@@ -57,6 +62,17 @@ class RegisterPage extends StatelessWidget {
                 ),
                 const SizedBox(
                   height: 20,
+                ),
+                TextFormField(
+                  controller: _name,
+                  decoration: const InputDecoration(
+                    hintText: 'Enter your name',
+                    prefixIcon: Icon(Icons.person),
+                    labelText: 'Full Name',
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 TextFormField(
                   controller: _email,
@@ -118,10 +134,24 @@ class RegisterPage extends StatelessWidget {
                         if (_password.text == _repassword.text) {
                           await FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
-                            email: _email.text,
-                            password: _password.text,
-                          );
-                          context.goNamed('home');
+                                email: _email.text,
+                                password: _password.text,
+                              )
+                              .then(
+                                // (value) => log(value.user?.uid ?? "-"),
+                                (value) => UserService()
+                                    .createUser(
+                                      MyUser.User(
+                                        id: value.user?.uid,
+                                        name: _name.text,
+                                        balance: 0,
+                                        email: _email.text,
+                                      ),
+                                    )
+                                    .then(
+                                      (value) => context.goNamed('home'),
+                                    ),
+                              );
                         } else {
                           throw Exception();
                         }

@@ -16,23 +16,56 @@ class TicketPage extends StatelessWidget {
           TicketService().getAllTickets(FirebaseAuth.instance.currentUser!.uid),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return ListView(
-            children: snapshot.data!.docs.map((e) {
-              Ticket ticket = Ticket.fromJson(e.data() as Map<String, dynamic>);
-              ticket.id = e.id;
-              return TicketItem(
-                ticket: ticket,
-                onTap: () {
-                  context.pushNamed(
-                    'ticket_detail',
-                    params: {"id": ticket.id ?? '0'},
-                  );
-                },
-              );
-            }).toList(),
-          );
+          return snapshot.data!.docs.isNotEmpty
+              ? ListView(
+                  children: snapshot.data!.docs.map((e) {
+                    Ticket ticket =
+                        Ticket.fromJson(e.data() as Map<String, dynamic>);
+                    ticket.id = e.id;
+                    return TicketItem(
+                      ticket: ticket,
+                      onTap: () {
+                        context.pushNamed(
+                          'ticket_detail',
+                          params: {"id": ticket.id ?? '0'},
+                        );
+                      },
+                    );
+                  }).toList(),
+                )
+              : Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 200,
+                        height: 200,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/alarm.png"),
+                          ),
+                        ),
+                      ),
+                      const Text(
+                        "Oops!",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Text(
+                        "You haven't order a ticket yet",
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                );
         } else {
-          return const Text('There is no recent tickets');
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
       },
     );

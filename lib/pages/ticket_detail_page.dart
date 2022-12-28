@@ -112,8 +112,11 @@ class TicketDetailPage extends StatelessWidget {
                               "Total Price",
                               style: TextStyle(fontSize: 20),
                             ),
-                            Text((ticket.price_per_seat! * ticket.seats!.length)
-                                .toString()),
+                            Text(NumberFormat.currency(
+                              locale: 'id',
+                              decimalDigits: 0,
+                            ).format((ticket.price_per_seat! *
+                                ticket.seats!.length))),
                           ],
                         ),
                       ),

@@ -2,8 +2,10 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_ticket/services/movie_service.dart';
+import 'package:movie_ticket/services/user_services.dart';
 import 'package:movie_ticket/widgets/movie_item.dart';
 import 'package:movie_ticket/widgets/movie_item_2.dart';
+import 'package:movie_ticket/entity/user.dart' as MyUser;
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -52,10 +54,26 @@ class MainPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://avatars.dicebear.com/api/initials/a.png"),
-                        backgroundColor: Colors.white,
+                      StreamBuilder(
+                        stream: UserService()
+                            .getUser(FirebaseAuth.instance.currentUser!.uid),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            MyUser.User user = MyUser.User.fromJson(
+                                snapshot.data!.data() as Map<String, dynamic>);
+                            return CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  "https://avatars.dicebear.com/api/initials/${user.name}.png"),
+                              backgroundColor: Colors.white,
+                            );
+                          } else {
+                            return const CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  "https://avatars.dicebear.com/api/initials/a.png"),
+                              backgroundColor: Colors.white,
+                            );
+                          }
+                        },
                       ),
                       Row(
                         children: const [

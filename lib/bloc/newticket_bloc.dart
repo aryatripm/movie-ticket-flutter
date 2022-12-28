@@ -11,7 +11,35 @@ class NewticketBloc extends Bloc<NewticketEvent, NewticketState> {
   NewticketBloc() : super(const _Initial()) {
     on<NewticketEvent>((event, emit) {
       emit(state.when(
-        initial: () => NewticketState.created(Ticket()),
+        initial: () {
+          return event.when(
+            create: (newTicket) => NewticketState.created(newTicket),
+            editId: (newId) {
+              return NewticketState.created(Ticket());
+            },
+            editUserId: (newUserId) {
+              return NewticketState.created(Ticket());
+            },
+            editMovieId: (newMovieId) {
+              return NewticketState.created(Ticket());
+            },
+            editDate: (newDate) {
+              return NewticketState.created(Ticket());
+            },
+            editLocation: (newLocation) {
+              return NewticketState.created(Ticket());
+            },
+            editPricePerSeat: (newPricePerSeat) {
+              return NewticketState.created(Ticket());
+            },
+            editSeats: (newSeats) {
+              return NewticketState.created(Ticket());
+            },
+            delete: () {
+              return const NewticketState.initial();
+            },
+          );
+        },
         created: (ticket) {
           return event.when(
             create: (newTicket) => NewticketState.created(newTicket),
@@ -42,6 +70,9 @@ class NewticketBloc extends Bloc<NewticketEvent, NewticketState> {
             editSeats: (newSeats) {
               ticket.seats = newSeats;
               return NewticketState.created(ticket);
+            },
+            delete: () {
+              return const NewticketState.initial();
             },
           );
         },

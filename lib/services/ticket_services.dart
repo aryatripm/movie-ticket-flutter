@@ -20,13 +20,16 @@ class TicketService {
   }
 
   Future<DocumentReference<Object?>> createTicket(Ticket newTicket) {
-    return tickets.add({
-      'movie_id': newTicket.movie_id,
-      'user_id': newTicket.user_id,
-      'date': newTicket.date,
-      'location': newTicket.location,
-      'seats': newTicket.seats,
-      'price_per_seat': 20000
-    });
+    return UserService()
+        .updateBalanceUser(
+            newTicket.user_id!, -(newTicket.seats!.length * 20000))
+        .then((value) => tickets.add({
+              'movie_id': newTicket.movie_id,
+              'user_id': newTicket.user_id,
+              'date': newTicket.date,
+              'location': newTicket.location,
+              'seats': newTicket.seats,
+              'price_per_seat': 20000
+            }));
   }
 }

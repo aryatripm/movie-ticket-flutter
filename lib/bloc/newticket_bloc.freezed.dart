@@ -26,6 +26,7 @@ mixin _$NewticketEvent {
     required TResult Function(String newLocation) editLocation,
     required TResult Function(int newPricePerSeat) editPricePerSeat,
     required TResult Function(List<String> newSeats) editSeats,
+    required TResult Function() delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +39,7 @@ mixin _$NewticketEvent {
     TResult? Function(String newLocation)? editLocation,
     TResult? Function(int newPricePerSeat)? editPricePerSeat,
     TResult? Function(List<String> newSeats)? editSeats,
+    TResult? Function()? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +52,7 @@ mixin _$NewticketEvent {
     TResult Function(String newLocation)? editLocation,
     TResult Function(int newPricePerSeat)? editPricePerSeat,
     TResult Function(List<String> newSeats)? editSeats,
+    TResult Function()? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +66,7 @@ mixin _$NewticketEvent {
     required TResult Function(_EditLocation value) editLocation,
     required TResult Function(_EditPricePerSeat value) editPricePerSeat,
     required TResult Function(_EditSeats value) editSeats,
+    required TResult Function(_Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +79,7 @@ mixin _$NewticketEvent {
     TResult? Function(_EditLocation value)? editLocation,
     TResult? Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult? Function(_EditSeats value)? editSeats,
+    TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +92,7 @@ mixin _$NewticketEvent {
     TResult Function(_EditLocation value)? editLocation,
     TResult Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult Function(_EditSeats value)? editSeats,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -181,6 +187,7 @@ class _$_Create implements _Create {
     required TResult Function(String newLocation) editLocation,
     required TResult Function(int newPricePerSeat) editPricePerSeat,
     required TResult Function(List<String> newSeats) editSeats,
+    required TResult Function() delete,
   }) {
     return create(newTicket);
   }
@@ -196,6 +203,7 @@ class _$_Create implements _Create {
     TResult? Function(String newLocation)? editLocation,
     TResult? Function(int newPricePerSeat)? editPricePerSeat,
     TResult? Function(List<String> newSeats)? editSeats,
+    TResult? Function()? delete,
   }) {
     return create?.call(newTicket);
   }
@@ -211,6 +219,7 @@ class _$_Create implements _Create {
     TResult Function(String newLocation)? editLocation,
     TResult Function(int newPricePerSeat)? editPricePerSeat,
     TResult Function(List<String> newSeats)? editSeats,
+    TResult Function()? delete,
     required TResult orElse(),
   }) {
     if (create != null) {
@@ -230,6 +239,7 @@ class _$_Create implements _Create {
     required TResult Function(_EditLocation value) editLocation,
     required TResult Function(_EditPricePerSeat value) editPricePerSeat,
     required TResult Function(_EditSeats value) editSeats,
+    required TResult Function(_Delete value) delete,
   }) {
     return create(this);
   }
@@ -245,6 +255,7 @@ class _$_Create implements _Create {
     TResult? Function(_EditLocation value)? editLocation,
     TResult? Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult? Function(_EditSeats value)? editSeats,
+    TResult? Function(_Delete value)? delete,
   }) {
     return create?.call(this);
   }
@@ -260,6 +271,7 @@ class _$_Create implements _Create {
     TResult Function(_EditLocation value)? editLocation,
     TResult Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult Function(_EditSeats value)? editSeats,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (create != null) {
@@ -348,6 +360,7 @@ class _$_EditId implements _EditId {
     required TResult Function(String newLocation) editLocation,
     required TResult Function(int newPricePerSeat) editPricePerSeat,
     required TResult Function(List<String> newSeats) editSeats,
+    required TResult Function() delete,
   }) {
     return editId(newId);
   }
@@ -363,6 +376,7 @@ class _$_EditId implements _EditId {
     TResult? Function(String newLocation)? editLocation,
     TResult? Function(int newPricePerSeat)? editPricePerSeat,
     TResult? Function(List<String> newSeats)? editSeats,
+    TResult? Function()? delete,
   }) {
     return editId?.call(newId);
   }
@@ -378,6 +392,7 @@ class _$_EditId implements _EditId {
     TResult Function(String newLocation)? editLocation,
     TResult Function(int newPricePerSeat)? editPricePerSeat,
     TResult Function(List<String> newSeats)? editSeats,
+    TResult Function()? delete,
     required TResult orElse(),
   }) {
     if (editId != null) {
@@ -397,6 +412,7 @@ class _$_EditId implements _EditId {
     required TResult Function(_EditLocation value) editLocation,
     required TResult Function(_EditPricePerSeat value) editPricePerSeat,
     required TResult Function(_EditSeats value) editSeats,
+    required TResult Function(_Delete value) delete,
   }) {
     return editId(this);
   }
@@ -412,6 +428,7 @@ class _$_EditId implements _EditId {
     TResult? Function(_EditLocation value)? editLocation,
     TResult? Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult? Function(_EditSeats value)? editSeats,
+    TResult? Function(_Delete value)? delete,
   }) {
     return editId?.call(this);
   }
@@ -427,6 +444,7 @@ class _$_EditId implements _EditId {
     TResult Function(_EditLocation value)? editLocation,
     TResult Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult Function(_EditSeats value)? editSeats,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (editId != null) {
@@ -518,6 +536,7 @@ class _$_EditUserId implements _EditUserId {
     required TResult Function(String newLocation) editLocation,
     required TResult Function(int newPricePerSeat) editPricePerSeat,
     required TResult Function(List<String> newSeats) editSeats,
+    required TResult Function() delete,
   }) {
     return editUserId(newUserId);
   }
@@ -533,6 +552,7 @@ class _$_EditUserId implements _EditUserId {
     TResult? Function(String newLocation)? editLocation,
     TResult? Function(int newPricePerSeat)? editPricePerSeat,
     TResult? Function(List<String> newSeats)? editSeats,
+    TResult? Function()? delete,
   }) {
     return editUserId?.call(newUserId);
   }
@@ -548,6 +568,7 @@ class _$_EditUserId implements _EditUserId {
     TResult Function(String newLocation)? editLocation,
     TResult Function(int newPricePerSeat)? editPricePerSeat,
     TResult Function(List<String> newSeats)? editSeats,
+    TResult Function()? delete,
     required TResult orElse(),
   }) {
     if (editUserId != null) {
@@ -567,6 +588,7 @@ class _$_EditUserId implements _EditUserId {
     required TResult Function(_EditLocation value) editLocation,
     required TResult Function(_EditPricePerSeat value) editPricePerSeat,
     required TResult Function(_EditSeats value) editSeats,
+    required TResult Function(_Delete value) delete,
   }) {
     return editUserId(this);
   }
@@ -582,6 +604,7 @@ class _$_EditUserId implements _EditUserId {
     TResult? Function(_EditLocation value)? editLocation,
     TResult? Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult? Function(_EditSeats value)? editSeats,
+    TResult? Function(_Delete value)? delete,
   }) {
     return editUserId?.call(this);
   }
@@ -597,6 +620,7 @@ class _$_EditUserId implements _EditUserId {
     TResult Function(_EditLocation value)? editLocation,
     TResult Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult Function(_EditSeats value)? editSeats,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (editUserId != null) {
@@ -688,6 +712,7 @@ class _$_EditMovieId implements _EditMovieId {
     required TResult Function(String newLocation) editLocation,
     required TResult Function(int newPricePerSeat) editPricePerSeat,
     required TResult Function(List<String> newSeats) editSeats,
+    required TResult Function() delete,
   }) {
     return editMovieId(newMovieId);
   }
@@ -703,6 +728,7 @@ class _$_EditMovieId implements _EditMovieId {
     TResult? Function(String newLocation)? editLocation,
     TResult? Function(int newPricePerSeat)? editPricePerSeat,
     TResult? Function(List<String> newSeats)? editSeats,
+    TResult? Function()? delete,
   }) {
     return editMovieId?.call(newMovieId);
   }
@@ -718,6 +744,7 @@ class _$_EditMovieId implements _EditMovieId {
     TResult Function(String newLocation)? editLocation,
     TResult Function(int newPricePerSeat)? editPricePerSeat,
     TResult Function(List<String> newSeats)? editSeats,
+    TResult Function()? delete,
     required TResult orElse(),
   }) {
     if (editMovieId != null) {
@@ -737,6 +764,7 @@ class _$_EditMovieId implements _EditMovieId {
     required TResult Function(_EditLocation value) editLocation,
     required TResult Function(_EditPricePerSeat value) editPricePerSeat,
     required TResult Function(_EditSeats value) editSeats,
+    required TResult Function(_Delete value) delete,
   }) {
     return editMovieId(this);
   }
@@ -752,6 +780,7 @@ class _$_EditMovieId implements _EditMovieId {
     TResult? Function(_EditLocation value)? editLocation,
     TResult? Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult? Function(_EditSeats value)? editSeats,
+    TResult? Function(_Delete value)? delete,
   }) {
     return editMovieId?.call(this);
   }
@@ -767,6 +796,7 @@ class _$_EditMovieId implements _EditMovieId {
     TResult Function(_EditLocation value)? editLocation,
     TResult Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult Function(_EditSeats value)? editSeats,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (editMovieId != null) {
@@ -857,6 +887,7 @@ class _$_EditDate implements _EditDate {
     required TResult Function(String newLocation) editLocation,
     required TResult Function(int newPricePerSeat) editPricePerSeat,
     required TResult Function(List<String> newSeats) editSeats,
+    required TResult Function() delete,
   }) {
     return editDate(newDate);
   }
@@ -872,6 +903,7 @@ class _$_EditDate implements _EditDate {
     TResult? Function(String newLocation)? editLocation,
     TResult? Function(int newPricePerSeat)? editPricePerSeat,
     TResult? Function(List<String> newSeats)? editSeats,
+    TResult? Function()? delete,
   }) {
     return editDate?.call(newDate);
   }
@@ -887,6 +919,7 @@ class _$_EditDate implements _EditDate {
     TResult Function(String newLocation)? editLocation,
     TResult Function(int newPricePerSeat)? editPricePerSeat,
     TResult Function(List<String> newSeats)? editSeats,
+    TResult Function()? delete,
     required TResult orElse(),
   }) {
     if (editDate != null) {
@@ -906,6 +939,7 @@ class _$_EditDate implements _EditDate {
     required TResult Function(_EditLocation value) editLocation,
     required TResult Function(_EditPricePerSeat value) editPricePerSeat,
     required TResult Function(_EditSeats value) editSeats,
+    required TResult Function(_Delete value) delete,
   }) {
     return editDate(this);
   }
@@ -921,6 +955,7 @@ class _$_EditDate implements _EditDate {
     TResult? Function(_EditLocation value)? editLocation,
     TResult? Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult? Function(_EditSeats value)? editSeats,
+    TResult? Function(_Delete value)? delete,
   }) {
     return editDate?.call(this);
   }
@@ -936,6 +971,7 @@ class _$_EditDate implements _EditDate {
     TResult Function(_EditLocation value)? editLocation,
     TResult Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult Function(_EditSeats value)? editSeats,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (editDate != null) {
@@ -1027,6 +1063,7 @@ class _$_EditLocation implements _EditLocation {
     required TResult Function(String newLocation) editLocation,
     required TResult Function(int newPricePerSeat) editPricePerSeat,
     required TResult Function(List<String> newSeats) editSeats,
+    required TResult Function() delete,
   }) {
     return editLocation(newLocation);
   }
@@ -1042,6 +1079,7 @@ class _$_EditLocation implements _EditLocation {
     TResult? Function(String newLocation)? editLocation,
     TResult? Function(int newPricePerSeat)? editPricePerSeat,
     TResult? Function(List<String> newSeats)? editSeats,
+    TResult? Function()? delete,
   }) {
     return editLocation?.call(newLocation);
   }
@@ -1057,6 +1095,7 @@ class _$_EditLocation implements _EditLocation {
     TResult Function(String newLocation)? editLocation,
     TResult Function(int newPricePerSeat)? editPricePerSeat,
     TResult Function(List<String> newSeats)? editSeats,
+    TResult Function()? delete,
     required TResult orElse(),
   }) {
     if (editLocation != null) {
@@ -1076,6 +1115,7 @@ class _$_EditLocation implements _EditLocation {
     required TResult Function(_EditLocation value) editLocation,
     required TResult Function(_EditPricePerSeat value) editPricePerSeat,
     required TResult Function(_EditSeats value) editSeats,
+    required TResult Function(_Delete value) delete,
   }) {
     return editLocation(this);
   }
@@ -1091,6 +1131,7 @@ class _$_EditLocation implements _EditLocation {
     TResult? Function(_EditLocation value)? editLocation,
     TResult? Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult? Function(_EditSeats value)? editSeats,
+    TResult? Function(_Delete value)? delete,
   }) {
     return editLocation?.call(this);
   }
@@ -1106,6 +1147,7 @@ class _$_EditLocation implements _EditLocation {
     TResult Function(_EditLocation value)? editLocation,
     TResult Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult Function(_EditSeats value)? editSeats,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (editLocation != null) {
@@ -1197,6 +1239,7 @@ class _$_EditPricePerSeat implements _EditPricePerSeat {
     required TResult Function(String newLocation) editLocation,
     required TResult Function(int newPricePerSeat) editPricePerSeat,
     required TResult Function(List<String> newSeats) editSeats,
+    required TResult Function() delete,
   }) {
     return editPricePerSeat(newPricePerSeat);
   }
@@ -1212,6 +1255,7 @@ class _$_EditPricePerSeat implements _EditPricePerSeat {
     TResult? Function(String newLocation)? editLocation,
     TResult? Function(int newPricePerSeat)? editPricePerSeat,
     TResult? Function(List<String> newSeats)? editSeats,
+    TResult? Function()? delete,
   }) {
     return editPricePerSeat?.call(newPricePerSeat);
   }
@@ -1227,6 +1271,7 @@ class _$_EditPricePerSeat implements _EditPricePerSeat {
     TResult Function(String newLocation)? editLocation,
     TResult Function(int newPricePerSeat)? editPricePerSeat,
     TResult Function(List<String> newSeats)? editSeats,
+    TResult Function()? delete,
     required TResult orElse(),
   }) {
     if (editPricePerSeat != null) {
@@ -1246,6 +1291,7 @@ class _$_EditPricePerSeat implements _EditPricePerSeat {
     required TResult Function(_EditLocation value) editLocation,
     required TResult Function(_EditPricePerSeat value) editPricePerSeat,
     required TResult Function(_EditSeats value) editSeats,
+    required TResult Function(_Delete value) delete,
   }) {
     return editPricePerSeat(this);
   }
@@ -1261,6 +1307,7 @@ class _$_EditPricePerSeat implements _EditPricePerSeat {
     TResult? Function(_EditLocation value)? editLocation,
     TResult? Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult? Function(_EditSeats value)? editSeats,
+    TResult? Function(_Delete value)? delete,
   }) {
     return editPricePerSeat?.call(this);
   }
@@ -1276,6 +1323,7 @@ class _$_EditPricePerSeat implements _EditPricePerSeat {
     TResult Function(_EditLocation value)? editLocation,
     TResult Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult Function(_EditSeats value)? editSeats,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (editPricePerSeat != null) {
@@ -1372,6 +1420,7 @@ class _$_EditSeats implements _EditSeats {
     required TResult Function(String newLocation) editLocation,
     required TResult Function(int newPricePerSeat) editPricePerSeat,
     required TResult Function(List<String> newSeats) editSeats,
+    required TResult Function() delete,
   }) {
     return editSeats(newSeats);
   }
@@ -1387,6 +1436,7 @@ class _$_EditSeats implements _EditSeats {
     TResult? Function(String newLocation)? editLocation,
     TResult? Function(int newPricePerSeat)? editPricePerSeat,
     TResult? Function(List<String> newSeats)? editSeats,
+    TResult? Function()? delete,
   }) {
     return editSeats?.call(newSeats);
   }
@@ -1402,6 +1452,7 @@ class _$_EditSeats implements _EditSeats {
     TResult Function(String newLocation)? editLocation,
     TResult Function(int newPricePerSeat)? editPricePerSeat,
     TResult Function(List<String> newSeats)? editSeats,
+    TResult Function()? delete,
     required TResult orElse(),
   }) {
     if (editSeats != null) {
@@ -1421,6 +1472,7 @@ class _$_EditSeats implements _EditSeats {
     required TResult Function(_EditLocation value) editLocation,
     required TResult Function(_EditPricePerSeat value) editPricePerSeat,
     required TResult Function(_EditSeats value) editSeats,
+    required TResult Function(_Delete value) delete,
   }) {
     return editSeats(this);
   }
@@ -1436,6 +1488,7 @@ class _$_EditSeats implements _EditSeats {
     TResult? Function(_EditLocation value)? editLocation,
     TResult? Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult? Function(_EditSeats value)? editSeats,
+    TResult? Function(_Delete value)? delete,
   }) {
     return editSeats?.call(this);
   }
@@ -1451,6 +1504,7 @@ class _$_EditSeats implements _EditSeats {
     TResult Function(_EditLocation value)? editLocation,
     TResult Function(_EditPricePerSeat value)? editPricePerSeat,
     TResult Function(_EditSeats value)? editSeats,
+    TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
     if (editSeats != null) {
@@ -1467,6 +1521,148 @@ abstract class _EditSeats implements NewticketEvent {
   @JsonKey(ignore: true)
   _$$_EditSeatsCopyWith<_$_EditSeats> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteCopyWith<$Res> {
+  factory _$$_DeleteCopyWith(_$_Delete value, $Res Function(_$_Delete) then) =
+      __$$_DeleteCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_DeleteCopyWithImpl<$Res>
+    extends _$NewticketEventCopyWithImpl<$Res, _$_Delete>
+    implements _$$_DeleteCopyWith<$Res> {
+  __$$_DeleteCopyWithImpl(_$_Delete _value, $Res Function(_$_Delete) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Delete implements _Delete {
+  const _$_Delete();
+
+  @override
+  String toString() {
+    return 'NewticketEvent.delete()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Delete);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Ticket newTicket) create,
+    required TResult Function(String newId) editId,
+    required TResult Function(String newUserId) editUserId,
+    required TResult Function(String newMovieId) editMovieId,
+    required TResult Function(Timestamp newDate) editDate,
+    required TResult Function(String newLocation) editLocation,
+    required TResult Function(int newPricePerSeat) editPricePerSeat,
+    required TResult Function(List<String> newSeats) editSeats,
+    required TResult Function() delete,
+  }) {
+    return delete();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Ticket newTicket)? create,
+    TResult? Function(String newId)? editId,
+    TResult? Function(String newUserId)? editUserId,
+    TResult? Function(String newMovieId)? editMovieId,
+    TResult? Function(Timestamp newDate)? editDate,
+    TResult? Function(String newLocation)? editLocation,
+    TResult? Function(int newPricePerSeat)? editPricePerSeat,
+    TResult? Function(List<String> newSeats)? editSeats,
+    TResult? Function()? delete,
+  }) {
+    return delete?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Ticket newTicket)? create,
+    TResult Function(String newId)? editId,
+    TResult Function(String newUserId)? editUserId,
+    TResult Function(String newMovieId)? editMovieId,
+    TResult Function(Timestamp newDate)? editDate,
+    TResult Function(String newLocation)? editLocation,
+    TResult Function(int newPricePerSeat)? editPricePerSeat,
+    TResult Function(List<String> newSeats)? editSeats,
+    TResult Function()? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Create value) create,
+    required TResult Function(_EditId value) editId,
+    required TResult Function(_EditUserId value) editUserId,
+    required TResult Function(_EditMovieId value) editMovieId,
+    required TResult Function(_EditDate value) editDate,
+    required TResult Function(_EditLocation value) editLocation,
+    required TResult Function(_EditPricePerSeat value) editPricePerSeat,
+    required TResult Function(_EditSeats value) editSeats,
+    required TResult Function(_Delete value) delete,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Create value)? create,
+    TResult? Function(_EditId value)? editId,
+    TResult? Function(_EditUserId value)? editUserId,
+    TResult? Function(_EditMovieId value)? editMovieId,
+    TResult? Function(_EditDate value)? editDate,
+    TResult? Function(_EditLocation value)? editLocation,
+    TResult? Function(_EditPricePerSeat value)? editPricePerSeat,
+    TResult? Function(_EditSeats value)? editSeats,
+    TResult? Function(_Delete value)? delete,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Create value)? create,
+    TResult Function(_EditId value)? editId,
+    TResult Function(_EditUserId value)? editUserId,
+    TResult Function(_EditMovieId value)? editMovieId,
+    TResult Function(_EditDate value)? editDate,
+    TResult Function(_EditLocation value)? editLocation,
+    TResult Function(_EditPricePerSeat value)? editPricePerSeat,
+    TResult Function(_EditSeats value)? editSeats,
+    TResult Function(_Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Delete implements NewticketEvent {
+  const factory _Delete() = _$_Delete;
 }
 
 /// @nodoc

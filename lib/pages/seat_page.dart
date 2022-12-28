@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:movie_ticket/bloc/newticket_bloc.dart';
 import 'package:movie_ticket/widgets/seat_item.dart';
 
@@ -124,7 +125,10 @@ class _SeatPageState extends State<SeatPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Rp. ${(selectedSeats.length * 20000).toString()}",
+                      NumberFormat.currency(
+                        locale: 'id',
+                        decimalDigits: 0,
+                      ).format((selectedSeats.length * 20000)),
                       style: const TextStyle(fontSize: 20),
                     ),
                     ElevatedButton(

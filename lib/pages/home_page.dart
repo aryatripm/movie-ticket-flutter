@@ -1,6 +1,7 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_ticket/bloc/newticket_bloc.dart';
 import 'package:movie_ticket/pages/main_page.dart';
 import 'package:movie_ticket/pages/setting_page.dart';
 import 'package:movie_ticket/pages/ticket_page.dart';
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     context.read<SelectedmovieBloc>().add(const SelectedmovieEvent.unselect());
+    context.read<NewticketBloc>().add(const NewticketEvent.delete());
     return Scaffold(
       // appBar: AppBar(
       //   title: Text("Hi, ${FirebaseAuth.instance.currentUser!.email}"),

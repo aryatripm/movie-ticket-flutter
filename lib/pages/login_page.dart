@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_ticket/services/auth_services.dart';
+import 'package:movie_ticket/services/user_services.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -134,11 +135,18 @@ class LoginPage extends StatelessWidget {
                         //     );
                         //   },
                         // );
-                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                        await FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
                           email: _email.text,
                           password: _password.text,
-                        );
-                        context.goNamed('home');
+                        )
+                            .then((value) {
+                          UserService()
+                              .getOneTimeUser(value.user?.uid ?? '0')
+                              .then((value) => context.goNamed('home'))
+                              .onError((error, stackTrace) =>
+                                  FirebaseAuthException(code: '0'));
+                        });
                       } on FirebaseAuthException catch (e) {
                         _showError(context, e);
                       }

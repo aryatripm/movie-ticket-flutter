@@ -11,4 +11,5 @@ class NewticketEvent with _$NewticketEvent {
   const factory NewticketEvent.editPricePerSeat(int newPricePerSeat) =
       _EditPricePerSeat;
   const factory NewticketEvent.editSeats(List<String> newSeats) = _EditSeats;
+  const factory NewticketEvent.delete() = _Delete;
 }

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_ticket/entity/history_topup.dart';
 import 'package:movie_ticket/entity/user.dart' as MyUser;
@@ -62,6 +63,14 @@ class UserPage extends StatelessWidget {
                         border: Border.all(
                           color: Colors.red,
                         ),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 10,
+                            spreadRadius: 0,
+                            offset: Offset(0, 5),
+                          ),
+                        ],
                         borderRadius:
                             const BorderRadius.all(Radius.circular(20)),
                       ),
@@ -80,18 +89,22 @@ class UserPage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "IDR ${user.balance}",
+                                // "IDR ${user.balance}",
+                                NumberFormat.currency(
+                                  locale: 'id',
+                                  symbol: 'IDR ',
+                                  decimalDigits: 0,
+                                ).format(user.balance),
                                 style: const TextStyle(fontSize: 20),
                               ),
                             ],
                           ),
                           ElevatedButton(
-                            child: const Text("Top Up"),
-                            onPressed: () => UserService().updateBalanceUser(
-                                FirebaseAuth.instance.currentUser!.uid, 50000),
+                            onPressed: () => context.goNamed("topup"),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.red,
                                 foregroundColor: Colors.white),
+                            child: const Text("Top Up"),
                           ),
                         ],
                       ),
@@ -108,37 +121,49 @@ class UserPage extends StatelessWidget {
                           FirebaseAuth.instance.currentUser!.uid),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Column(
-                            children: snapshot.data!.docs.map((e) {
-                              HistoryTopup h = HistoryTopup.fromJson(
-                                  e.data() as Map<String, dynamic>);
-                              return Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 20,
-                                ),
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF373838),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(DateFormat.yMMMd()
-                                        .format(h.date!.toDate())),
-                                    Text(
-                                      "IDR ${h.amount}",
-                                      style: const TextStyle(fontSize: 20),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }).toList(),
-                          );
+                          return snapshot.data!.docs.isNotEmpty
+                              ? Column(
+                                  children: snapshot.data!.docs.map((e) {
+                                    HistoryTopup h = HistoryTopup.fromJson(
+                                        e.data() as Map<String, dynamic>);
+                                    return Container(
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 10,
+                                        horizontal: 20,
+                                      ),
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 10),
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xFF373838),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20)),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(DateFormat.yMMMd()
+                                              .format(h.date!.toDate())),
+                                          Text(
+                                            // "IDR ${h.amount}",
+                                            NumberFormat.currency(
+                                              locale: 'id',
+                                              symbol: "",
+                                              decimalDigits: 0,
+                                            ).format(h.amount),
+                                            style:
+                                                const TextStyle(fontSize: 20),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }).toList(),
+                                )
+                              : const Center(
+                                  child: Text(
+                                      "Oops!, There is no recent transaction"),
+                                );
                         } else {
                           return const Text("No History Found");
                         }

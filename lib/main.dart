@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_ticket/bloc/newticket_bloc.dart';
 import 'package:movie_ticket/bloc/selectedmovie_bloc.dart';
+import 'package:movie_ticket/entity/ticket.dart';
 import 'package:movie_ticket/firebase_options.dart';
 import 'package:movie_ticket/pages/book_page.dart';
 import 'package:movie_ticket/pages/confirmation_page.dart';
@@ -13,8 +14,10 @@ import 'package:movie_ticket/pages/home_page.dart';
 import 'package:movie_ticket/pages/login_page.dart';
 import 'package:movie_ticket/pages/register_page.dart';
 import 'package:movie_ticket/pages/seat_page.dart';
+import 'package:movie_ticket/pages/success_page.dart';
 import 'package:movie_ticket/pages/ticket_detail_page.dart';
 import 'package:movie_ticket/pages/ticket_page.dart';
+import 'package:movie_ticket/pages/topup_page.dart';
 import 'package:movie_ticket/theme.dart';
 
 void main() async {
@@ -98,6 +101,18 @@ class MyApp extends StatelessWidget {
                     TicketDetailPage(ticketId: state.params['id']!),
               ),
             ],
+          ),
+          GoRoute(
+            path: 'top-up',
+            name: 'topup',
+            builder: (context, state) => TopUpPage(),
+          ),
+          GoRoute(
+            path: 'success',
+            name: 'success',
+            builder: (context, state) => SuccessPage(
+              type: state.queryParams['type'],
+            ),
           ),
         ],
       )
