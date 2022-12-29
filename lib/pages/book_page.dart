@@ -24,6 +24,7 @@ class BookPage extends StatefulWidget {
 class _BookPageState extends State<BookPage> {
   late List<DateTime> dates;
   late DateTime selectedDate;
+  DateTime currentDate = DateTime.now();
   late String selectedTheater;
   late int selectedTime;
 
@@ -31,8 +32,10 @@ class _BookPageState extends State<BookPage> {
   void initState() {
     super.initState();
 
-    dates =
-        List.generate(7, (index) => DateTime.now().add(Duration(days: index)));
+    dates = List.generate(
+        7,
+        (index) => (DateTime.now().add(const Duration(days: 1)))
+            .add(Duration(days: index)));
     selectedDate = DateTime.now();
     selectedTheater = "";
   }
@@ -134,22 +137,29 @@ class _BookPageState extends State<BookPage> {
       //   label: const Text("Procced"),
       //   icon: const Icon(Icons.arrow_circle_right),
       // ),
-      bottomNavigationBar: Container(
-        margin: const EdgeInsets.all(20),
-        padding: const EdgeInsets.symmetric(horizontal: 70),
-        child: ElevatedButton(
-          onPressed: () => context.pushNamed('seat'),
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(
-              // horizontal: 10,
-              vertical: 15,
+      bottomNavigationBar: AnimatedSlide(
+        duration: const Duration(milliseconds: 500),
+        offset: (selectedTheater != "" && selectedDate.day != currentDate.day)
+            ? const Offset(0, 0)
+            : const Offset(0, 1),
+        curve: Curves.easeInOut,
+        child: Container(
+          margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 70),
+          child: ElevatedButton(
+            onPressed: () => context.pushNamed('seat'),
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(
+                // horizontal: 10,
+                vertical: 15,
+              ),
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
             ),
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-          ),
-          child: const Text(
-            "Confirm",
-            style: TextStyle(fontSize: 18),
+            child: const Text(
+              "Confirm",
+              style: TextStyle(fontSize: 18),
+            ),
           ),
         ),
       ),

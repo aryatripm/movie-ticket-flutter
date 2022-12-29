@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -104,51 +106,58 @@ class _SeatPageState extends State<SeatPage> {
               ),
             ],
           ),
-          Container(
-            margin: const EdgeInsets.all(20),
-            padding: const EdgeInsets.all(15),
-            decoration: const BoxDecoration(
-              color: Color(0xFF373838),
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Selected Seats",
-                  style: TextStyle(fontSize: 20),
-                ),
-                Row(
-                  children: selectedSeats.map((e) => Text("$e,")).toList(),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      NumberFormat.currency(
-                        locale: 'id',
-                        decimalDigits: 0,
-                      ).format((selectedSeats.length * 20000)),
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                    ElevatedButton(
-                      onPressed: () => context.pushNamed('confirm'),
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 50,
-                          vertical: 10,
+          AnimatedSlide(
+            duration: const Duration(milliseconds: 500),
+            offset: selectedSeats.isNotEmpty
+                ? const Offset(0, 0)
+                : const Offset(0, 5),
+            curve: Curves.easeInOut,
+            child: Container(
+              margin: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(15),
+              decoration: const BoxDecoration(
+                color: Color(0xFF373838),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Selected Seats",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Row(
+                    children: selectedSeats.map((e) => Text("$e,")).toList(),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        NumberFormat.currency(
+                          locale: 'id',
+                          decimalDigits: 0,
+                        ).format((selectedSeats.length * 20000)),
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => context.pushNamed('confirm'),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 50,
+                            vertical: 10,
+                          ),
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
                         ),
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white,
-                      ),
-                      child: const Text(
-                        "Confirm",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    )
-                  ],
-                )
-              ],
+                        child: const Text(
+                          "Confirm",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ],
@@ -192,6 +201,7 @@ class _SeatPageState extends State<SeatPage> {
                       selectedSeats.add("${row[i]}$index");
                     }
                   });
+                  log(selectedSeats.toString());
                 },
               ),
             ),

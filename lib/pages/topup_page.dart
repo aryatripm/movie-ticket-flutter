@@ -97,8 +97,11 @@ class _TopUpPageState extends State<TopUpPage> {
                   selectedAmount = 0;
                 });
               },
-              onChanged: (value) =>
-                  selectedAmount = int.parse(_customAmount.text),
+              onChanged: (value) {
+                setState(() {
+                  selectedAmount = int.parse(_customAmount.text);
+                });
+              },
               decoration: const InputDecoration(
                 border: OutlineInputBorder(
                   // borderSide: BorderSide.none,
@@ -118,26 +121,31 @@ class _TopUpPageState extends State<TopUpPage> {
           ),
         ],
       ),
-      bottomNavigationBar: Container(
-        margin: const EdgeInsets.all(20),
-        padding: const EdgeInsets.symmetric(horizontal: 70),
-        child: ElevatedButton(
-          onPressed: () => UserService()
-              .updateBalanceUser(
-                  FirebaseAuth.instance.currentUser!.uid, selectedAmount)
-              .then((value) =>
-                  context.goNamed('success', queryParams: {'type': 'topup'})),
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(
-              // horizontal: 10,
-              vertical: 15,
+      bottomNavigationBar: AnimatedSlide(
+        duration: const Duration(milliseconds: 500),
+        offset: selectedAmount != 0 ? const Offset(0, 0) : const Offset(0, 5),
+        curve: Curves.easeInOut,
+        child: Container(
+          margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 70),
+          child: ElevatedButton(
+            onPressed: () => UserService()
+                .updateBalanceUser(
+                    FirebaseAuth.instance.currentUser!.uid, selectedAmount)
+                .then((value) =>
+                    context.goNamed('success', queryParams: {'type': 'topup'})),
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(
+                // horizontal: 10,
+                vertical: 15,
+              ),
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
             ),
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-          ),
-          child: const Text(
-            "Confirm",
-            style: TextStyle(fontSize: 18),
+            child: const Text(
+              "Confirm",
+              style: TextStyle(fontSize: 18),
+            ),
           ),
         ),
       ),

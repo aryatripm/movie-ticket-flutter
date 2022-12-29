@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class MyTheme {
   static ThemeData darkMode = ThemeData(
     useMaterial3: true,
+    fontFamily: "Montserrat",
     scaffoldBackgroundColor: const Color(0xFF161616),
     // colorScheme: const ColorScheme.dark(),
     brightness: Brightness.dark,

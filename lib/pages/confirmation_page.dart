@@ -70,7 +70,10 @@ class ConfirmationPage extends StatelessWidget {
                                 selectedMovie.title,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(fontSize: 20),
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Row(
                                 children: selectedMovie.genres
