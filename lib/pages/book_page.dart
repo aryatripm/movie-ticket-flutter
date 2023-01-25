@@ -175,12 +175,16 @@ class _BookPageState extends State<BookPage> {
           isSelected: selectedDate.day == dates[i].day,
           onTap: () {
             dynamic newDate = dates[i].day;
+            dynamic newMonth = dates[i].month;
             if (dates[i].day.toString().length == 1) {
               newDate = '0${newDate.toString()}';
             }
+            if (dates[i].month.toString().length == 1) {
+              newMonth = '0${newMonth.toString()}';
+            }
             setState(() {
               selectedDate = DateTime.parse(
-                  '${selectedDate.year}-${selectedDate.month}-$newDate ${selectedDate.hour}:00:00');
+                  '${selectedDate.year}-$newMonth-$newDate ${selectedDate.hour}:00:00');
             });
           },
         ),
@@ -200,12 +204,16 @@ class _BookPageState extends State<BookPage> {
           isSelected: selectedDate.hour == i,
           onTap: () {
             dynamic newDate = selectedDate.day.toString();
+            dynamic newMonth = selectedDate.month.toString();
             if (newDate.length == 1) {
               newDate = '0$newDate';
             }
+            if (newMonth.length == 1) {
+              newMonth = '0$newMonth';
+            }
             setState(() {
               selectedDate = DateTime.parse(
-                  '${selectedDate.year}-${selectedDate.month}-$newDate $i:00:00.000000');
+                  '${selectedDate.year}-$newMonth-$newDate $i:00:00.000000');
             });
           },
         ),

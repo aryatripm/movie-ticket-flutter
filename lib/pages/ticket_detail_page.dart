@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 import 'package:movie_ticket/entity/ticket.dart';
 import 'package:movie_ticket/services/movie_service.dart';
 import 'package:movie_ticket/services/ticket_services.dart';
@@ -129,6 +130,19 @@ class TicketDetailPage extends StatelessWidget {
                         version: QrVersions.auto,
                       ),
                     ],
+                  ),
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+                  child: ElevatedButton(
+                    onPressed: () => MapsLauncher.launchQuery(
+                        ticket.location ?? "Miko Mall"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                    ),
+                    child: Text("Maps"),
                   ),
                 ),
               ],

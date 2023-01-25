@@ -29,6 +29,7 @@ class _SeatPageState extends State<SeatPage> {
   Widget build(BuildContext context) {
     context.read<NewticketBloc>().add(NewticketEvent.editSeats(selectedSeats));
     return Scaffold(
+      extendBody: true,
       body: ListView(
         children: [
           Row(
@@ -51,7 +52,7 @@ class _SeatPageState extends State<SeatPage> {
               ),
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 50),
           Container(
             child: generateSeats(context),
           ),
@@ -106,74 +107,62 @@ class _SeatPageState extends State<SeatPage> {
               ),
             ],
           ),
-          AnimatedSlide(
-            duration: const Duration(milliseconds: 500),
-            offset: selectedSeats.isNotEmpty
-                ? const Offset(0, 0)
-                : const Offset(0, 5),
-            curve: Curves.easeInOut,
-            child: Container(
-              margin: const EdgeInsets.all(20),
-              padding: const EdgeInsets.all(15),
-              decoration: const BoxDecoration(
-                color: Color(0xFF373838),
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Selected Seats",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  Row(
-                    children: selectedSeats.map((e) => Text("$e,")).toList(),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        NumberFormat.currency(
-                          locale: 'id',
-                          decimalDigits: 0,
-                        ).format((selectedSeats.length * 20000)),
-                        style: const TextStyle(fontSize: 20),
-                      ),
-                      ElevatedButton(
-                        onPressed: () => context.pushNamed('confirm'),
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 50,
-                            vertical: 10,
-                          ),
-                          backgroundColor: Colors.red,
-                          foregroundColor: Colors.white,
-                        ),
-                        child: const Text(
-                          "Confirm",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: () => context.pushNamed('confirm'),
-      //   label: BlocBuilder<NewticketBloc, NewticketState>(
-      //     builder: (context, state) {
-      //       return Text(state.when(
-      //         initial: () => "Click seat first!",
-      //         created: (ticket) =>
-      //             "Buy Ticket Rp. ${((ticket.seats?.length ?? 0) * 20000).toString()}",
-      //       ));
-      //     },
-      //   ),
-      // ),
+      bottomNavigationBar: AnimatedSlide(
+        duration: const Duration(milliseconds: 500),
+        offset:
+            selectedSeats.isNotEmpty ? const Offset(0, 0) : const Offset(0, 5),
+        curve: Curves.easeInOut,
+        child: Container(
+          height: 150,
+          // margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(15),
+          decoration: const BoxDecoration(
+            color: Color(0xFF373838),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Selected Seats",
+                style: TextStyle(fontSize: 20),
+              ),
+              Row(
+                children: selectedSeats.map((e) => Text("$e,")).toList(),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    NumberFormat.currency(
+                      locale: 'id',
+                      decimalDigits: 0,
+                    ).format((selectedSeats.length * 20000)),
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => context.pushNamed('confirm'),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 50,
+                        vertical: 10,
+                      ),
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Text(
+                      "Confirm",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 

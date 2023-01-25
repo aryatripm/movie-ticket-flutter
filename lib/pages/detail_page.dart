@@ -39,7 +39,7 @@ class DetailPage extends StatelessWidget {
                               opacity: 0.5,
                               fit: BoxFit.fitHeight,
                               image: NetworkImage(
-                                  "https://image.tmdb.org/t/p/original${snapshot.data?.backdrop_path ?? '-'}")),
+                                  "https://image.tmdb.org/t/p/w500${snapshot.data?.backdrop_path ?? '-'}")),
                         ),
                       ),
                       Positioned(

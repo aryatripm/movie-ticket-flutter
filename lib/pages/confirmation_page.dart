@@ -113,37 +113,93 @@ class ConfirmationPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Date",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        Text(
-                          DateFormat.yMMMMEEEEd().format(
-                            ticket.date!.toDate(),
-                          ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.date_range,
+                              color: Colors.red,
+                            ),
+                            const SizedBox(width: 20),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Date",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Text(
+                                  DateFormat.yMMMMEEEEd().format(
+                                    ticket.date!.toDate(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 10),
-                        const Text(
-                          "Time",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        Text(
-                          DateFormat.jm().format(
-                            ticket.date!.toDate(),
-                          ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.timer,
+                              color: Colors.red,
+                            ),
+                            const SizedBox(width: 20),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Time",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Text(
+                                  DateFormat.jm().format(
+                                    ticket.date!.toDate(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 10),
-                        const Text(
-                          "Cinema",
-                          style: TextStyle(fontSize: 20),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.movie,
+                              color: Colors.red,
+                            ),
+                            const SizedBox(width: 20),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Cinema",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Text(ticket.location ?? 'loc'),
+                              ],
+                            ),
+                          ],
                         ),
-                        Text(ticket.location ?? 'loc'),
                         const SizedBox(height: 10),
-                        const Text(
-                          "Seats",
-                          style: TextStyle(fontSize: 20),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.chair,
+                              color: Colors.red,
+                            ),
+                            const SizedBox(width: 20),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Seats",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Text(ticket.seats.toString()),
+                              ],
+                            ),
+                          ],
                         ),
-                        Text(ticket.seats.toString()),
                       ],
                     ),
                   );
