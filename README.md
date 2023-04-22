@@ -18,12 +18,15 @@ flutter run
 - Topup or Balance features
 - Select Date/Theatres/Seat
 
-## Contributing
+## Screenshots
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+|Auth|Main|Detail|
+|--|--|--|
+|![](assets/ss/auth.jpg?raw=true)|![](assets/ss/main.jpg?raw=true)|![](assets/ss/detail.jpg?raw=true)|
 
-Please make sure to update tests as appropriate.
+|Topup|Setting|
+|--|--|
+|![](assets/ss/topup.jpg?raw=true)|![](assets/ss/setting.jpg?raw=true)|
 
 ## License
 
